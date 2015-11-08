@@ -45,7 +45,7 @@ public class Bot {
 	 * @return a new httpsClient
 	 */
 	private CloseableHttpClient buildHttpsClient() {
-		// Trust all SSL certificates the host trusts
+		// Trust all SSL certificates the host trusts 
 		// TODO insecure, use custom keystore instead!
 		SSLContext sslContext = SSLContexts.createDefault();
 
