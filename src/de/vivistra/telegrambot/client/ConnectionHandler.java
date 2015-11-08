@@ -39,7 +39,7 @@ public class ConnectionHandler {
 		httpsClient = buildHttpsClient();
 	}
 	
-	/**
+	/** 
 	 * Create a new httpsClient
 	 * 
 	 * @return a new httpsClient
