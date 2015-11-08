@@ -26,7 +26,7 @@ public class ConnectionHandler {
 
 	private final TelegramBot telegramBot;
 	
-	private static final Integer RETRY_ATTEMPS = 60;
+	private static final Integer RETRY_ATTEMPS = 200;
 
 	private CloseableHttpClient httpsClient;
 

@@ -88,7 +88,6 @@ public class Receiver {
 						break;
 					case 409:
 						telegramBot.getLogger().error("There is already a bot with this token connected");
-						System.exit(1);
 						break;
 					default:
 						telegramBot.getLogger().error("Unknown answer, request failed.");
