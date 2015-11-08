@@ -14,6 +14,7 @@ This software is still under development and need some more time to be finished.
 Changelog 0.9.0.2:
  - Bot is no longer shutting down the hole application if another application stole the connection to the bot api.
  - more reconnect tries.
+
 Changelog 0.9.0.1:
  - Reprogrammed parts of the bot to allow multiple instances.
 
