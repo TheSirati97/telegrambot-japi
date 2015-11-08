@@ -9,16 +9,19 @@ import de.vivistra.telegrambot.receiver.IReceiverService;
 
 public class BotExample {
 	TelegramBot telegramBot;
-	
+
 	public BotExample() {
 		// Set API token
-		telegramBot = new TelegramBot("<Your TelegramAPI token here>", LogManager.getLogger("Telegram Bot 1"));
+		telegramBot = new TelegramBot("<Your TelegramAPI token here>",
+				LogManager.getLogger("Telegram Bot 1"));
 	}
-	
-	// Send a message to you. (You have to message the bot first to allow him to send you messages)
+
+	// Send a message to you. (You have to message the bot first to allow him to
+	// send you messages)
 	public void sendMessageToMe() {
-				
-		// A Telegram ID. It is a negative Integer for bots and a positive Integer for humans.
+
+		// A Telegram ID. It is a negative Integer for bots and a positive
+		// Integer for humans.
 		int recipient = 123456;// <Your TelegramID here>;
 
 		// Create a message
@@ -27,8 +30,8 @@ public class BotExample {
 		// Send the message
 		telegramBot.send(message);
 	}
-	
-	//First you need to implement the `IReceiverService` interface.
+
+	// First you need to implement the `IReceiverService` interface.
 	public class GetMessage implements IReceiverService {
 
 		@Override
@@ -47,8 +50,10 @@ public class BotExample {
 			}
 		}
 	}
-	
-	//Now we will create a object of our `GetMessage` and subscribe the `Receiver`. Our method `received` will be called every time a `Message` was received.
+
+	// Now we will create a object of our `GetMessage` and subscribe the
+	// `Receiver`. Our method `received` will be called every time a `Message`
+	// was received.
 	public void subscribe() {
 		// Create an IReceiverService object
 		GetMessage getMessage = new GetMessage();
