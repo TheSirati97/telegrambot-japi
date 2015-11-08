@@ -15,30 +15,30 @@ import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.ssl.SSLContexts;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
-import de.vivistra.telegrambot.settings.BotSettings;
+import de.vivistra.telegrambot.TelegramBot;
 
 /**
  * This class connects to the Telegram API and posts querys.
  */
-public class Bot {
+public class ConnectionHandler {
 
-	private static final Logger LOG = LogManager.getLogger();
-	private static String API_URL_WITH_TOKEN = BotSettings.getApiUrlWithToken();
 
-	private static final Integer RETRY_ATTEMPS = 10;
+	private final TelegramBot telegramBot;
+	
+	private static final Integer RETRY_ATTEMPS = 60;
 
 	private CloseableHttpClient httpsClient;
+
 
 	/**
 	 * Constructor opens the HTTPS connection to the Telegram API.
 	 */
-	public Bot() {
+	public ConnectionHandler(TelegramBot telegramBot) {
+		this.telegramBot = telegramBot;
 		httpsClient = buildHttpsClient();
 	}
-
+	
 	/**
 	 * Create a new httpsClient
 	 * 
@@ -50,7 +50,7 @@ public class Bot {
 		SSLContext sslContext = SSLContexts.createDefault();
 
 		// Allow TLSv1 protocol only
-		SSLConnectionSocketFactory sslSF = new SSLConnectionSocketFactory(sslContext, new String[] { "TLSv1" }, null,
+		SSLConnectionSocketFactory sslSF = new SSLConnectionSocketFactory(sslContext, new String[] { "TLSv1.2" }, null,
 				SSLConnectionSocketFactory.getDefaultHostnameVerifier());
 
 		// Create and return httpsClient
@@ -65,7 +65,7 @@ public class Bot {
 			// Close connection
 			httpsClient.close();
 		} catch (IOException e) {
-			LOG.error("Could not close HTTPS connection to Telegram API.", e);
+			telegramBot.getLogger().error("Could not close HTTPS connection to Telegram API.", e);
 			return false;
 		}
 		return true;
@@ -76,9 +76,9 @@ public class Bot {
 	 * API.
 	 */
 	public BotResponse post(BotRequest request) {
-		HttpPost httpPost = new HttpPost(API_URL_WITH_TOKEN + request.getCommand());
+		HttpPost httpPost = new HttpPost(telegramBot.getApiUrlWithToken() + request.getCommand());
 
-		LOG.debug(httpPost.getRequestLine());
+		telegramBot.getLogger().debug(httpPost.getRequestLine());
 
 		// Add some content to the request
 		if (request.getContent() != null) {
@@ -101,7 +101,7 @@ public class Bot {
 
 				HttpEntity entity = response.getEntity();
 
-				LOG.debug(response.getStatusLine());
+				telegramBot.getLogger().debug(response.getStatusLine());
 
 				// Read the response - create readers
 				InputStreamReader inputReader = new InputStreamReader(entity.getContent());
@@ -115,7 +115,7 @@ public class Bot {
 				while ((nextLine = reader.readLine()) != null) {
 					bodyBuilder.append(nextLine);
 				}
-				LOG.debug(bodyBuilder.toString());
+				telegramBot.getLogger().debug(bodyBuilder.toString());
 
 				// Build a botResponse object, makes it comfortable to handle ;)
 				botResponse = new BotResponse(response.getStatusLine().getStatusCode(), response.getAllHeaders(),
@@ -123,31 +123,31 @@ public class Bot {
 
 				// Was successful, do not retry!
 				retryCounter = RETRY_ATTEMPS;
+				break;
 
 			} catch (SocketException e) {
-				LOG.warn("Run in SocketException. Attemp: " + (retryCounter + 1) + "/" + RETRY_ATTEMPS);
+				telegramBot.getLogger().warn("Run in SocketException. Attemp: " + (retryCounter + 1) + "/" + RETRY_ATTEMPS);
 
 				// Close old httpsClient
 				try {
 					httpsClient.close();
 				} catch (IOException ioe) {
-					LOG.warn("Wanna retry, but I failed to close old httpClient.");
+					telegramBot.getLogger().warn("Wanna retry, but I failed to close old httpClient.");
 				}
 
 				// Timeout first 0s, then 1s, 2s, 3s, ...
 				try {
 					Thread.sleep(retryCounter * 1000);
 				} catch (InterruptedException exs) {
-					LOG.debug("Thread sleep interrupted");
+					telegramBot.getLogger().debug("Thread sleep interrupted");
 				}
 
 				// Build a new httpsClient
 				httpsClient = buildHttpsClient();
-				LOG.info("New httpsClient built, retry now.");
+				telegramBot.getLogger().info("New httpsClient built, retry now.");
 
 			} catch (IOException e) {
-				LOG.error("Error while sending / receiving data. Attemp: " + (retryCounter + 1) + "/" + RETRY_ATTEMPS,
-						e);
+				telegramBot.getLogger().error("Error while sending / receiving data. Attemp: " + (retryCounter + 1) + "/" + RETRY_ATTEMPS, e);
 
 			} finally {
 				// When finished, close response
@@ -156,7 +156,7 @@ public class Bot {
 						response.close();
 					}
 				} catch (IOException e) {
-					LOG.warn("Could not close request.", e);
+					telegramBot.getLogger().warn("Could not close request.", e);
 				}
 			}
 		}
