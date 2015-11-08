@@ -11,6 +11,9 @@ If anyone wants to help me get used to github, please also contact me via [Teleg
 
 This software is still under development and need some more time to be finished. But it is already working nice, so we want to share the software with you. If you want, feel free to contribute.
 
+Changelog 0.9.0.2:
+ - Bot is no longer shutting down the hole application if another application stole the connection to the bot api.
+ - more reconnect tries.
 Changelog 0.9.0.1:
  - Reprogrammed parts of the bot to allow multiple instances.
 
@@ -18,7 +21,7 @@ Changelog 0.9.0.1:
 
 ### Just download the jar
 
-You can download the first release [here](https://github.com/TheSirati97/telegrambot-japi/blob/master-mcn/releases/MCN-Telegram-Bot-API-0.9.0.1.jar?raw=true). 
+You can download the first release [here](https://github.com/TheSirati97/telegrambot-japi/blob/master-mcn/releases/MCN-Telegram-Bot-API-0.9.0.2.jar?raw=true). 
 I tested it with my two testbots. It works fine for me.
 
 ## HowTo use the software
