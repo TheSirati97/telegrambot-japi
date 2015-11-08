@@ -1,7 +1,7 @@
 # TelegramBot JavaAPI
 
 Hey guys, i am sirati97 and I am a github noob. I normally only have private repos on BitBucket.
-I made this fork because [marzn's Telegram Bot Api](https://github.com/marzn/telegrambot-japi) only allows you to run one telegram bot per java classloader (or program in normal environment). (WIP)
+I made this fork because [marzn's Telegram Bot Api](https://github.com/marzn/telegrambot-japi) only allows you to run one telegram bot per java classloader (or program in normal environment).
 
 If you have any question feel free to contact me via [Telegram](http://telegram.me/thesirati97).
 
@@ -11,13 +11,15 @@ If anyone wants to help me get used to github, please also contact me via [Teleg
 
 This software is still under development and need some more time to be finished. But it is already working nice, so we want to share the software with you. If you want, feel free to contribute.
 
-No changelog yet!
+Changelog 0.9.0.1:
+ - Reprogrammed parts of the bot to allow multiple instances.
 
 ## HowTo get the software
 
 ### Just download the jar
 
-You can download the first pre release [here](https://github.com/TheSirati97/telegrambot-japi/blob/master-mcn/releases/MCN-Telegram-Bot-API-0.9.0.1.jar?raw=true). Warning i did not tested it yet!.
+You can download the first release [here](https://github.com/TheSirati97/telegrambot-japi/blob/master-mcn/releases/MCN-Telegram-Bot-API-0.9.0.1.jar?raw=true). 
+I tested it with my two testbot. It works fine for me.
 
 ## HowTo use the software
 
