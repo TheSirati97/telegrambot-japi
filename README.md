@@ -19,7 +19,7 @@ Changelog 0.9.0.1:
 ### Just download the jar
 
 You can download the first release [here](https://github.com/TheSirati97/telegrambot-japi/blob/master-mcn/releases/MCN-Telegram-Bot-API-0.9.0.1.jar?raw=true). 
-I tested it with my two testbot. It works fine for me.
+I tested it with my two testbots. It works fine for me.
 
 ## HowTo use the software
 
