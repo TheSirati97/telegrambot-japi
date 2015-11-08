@@ -17,7 +17,7 @@ No changelog yet!
 
 ### Just download a jar
 
-I will attach a jar download later. 
+You can download the first pre release [here](https://github.com/TheSirati97/telegrambot-japi/blob/master-mcn/releases/MCN-Telegram-Bot-API-0.9.0.1.jar?raw=true). Warning i didnt tested it yet!.
 
 ## HowTo use the software
 
