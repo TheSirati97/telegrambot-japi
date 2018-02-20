@@ -1,11 +1,8 @@
 # TelegramBot JavaAPI
 
-Hey guys, i am sirati97 and I am a github noob. I normally only have private repos on BitBucket.
 I made this fork because [marzn's Telegram Bot Api](https://github.com/marzn/telegrambot-japi) only allows you to run one telegram bot per java classloader (or program in normal environment).
 
 If you have any question feel free to contact me via [Telegram](http://telegram.me/thesirati97).
-
-If anyone wants to help me get used to github, please also contact me via [Telegram](http://telegram.me/thesirati97).
 
 ## Project state
 
